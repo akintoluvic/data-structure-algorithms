@@ -2,7 +2,20 @@
 
 /**
  * 1. Vertex and Edges List
+ * This stores the list of nodes/vertices and the edges of the list in two diff arrays
+ * Time complexity to find Adjacent Node is O(e)
  */
+
+const vertices = ['A','B','C','D','E']
+
+const edges = [
+    ['A', 'B'],
+    ['A', 'D'],
+    ['B','C'],
+    ['C', 'D'],
+    ['C','E'],
+    ['D','E']
+]
 
 /**
  * 2. Adjacent Matrix
