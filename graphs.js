@@ -41,6 +41,11 @@ class AdjacentNode {
     getAdjacentNodes() {
         return this.edgesList.map(edge => edge.value)
     }
+
+    isConnected(node) {
+        // the map is expensive, you need to optimise
+        return this.edgesList.map(edge => edge.value).indexOf(node.value) > -1
+    }
 }
 
 class AdjacentGraph {
@@ -68,11 +73,12 @@ nodeC.connectNode(nodeD)
 nodeC.connectNode(nodeE)
 nodeD.connectNode(nodeE)
 
-for(node of adjacentGraph.nodes) {
-    console.log(`Node ${node.value}`)
-    for(edge of node.edgesList) {
-        console.log(`Node ${node.value} is connected to ${edge.value}`)
-    }
-}
+// for(node of adjacentGraph.nodes) {
+//     console.log(`Node ${node.value}`)
+//     for(edge of node.edgesList) {
+//         console.log(`Node ${node.value} is connected to ${edge.value}`)
+//     }
+// }
 
 console.log(nodeA.getAdjacentNodes())
+console.log(nodeB.isConnected(nodeC))
