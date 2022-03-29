@@ -50,9 +50,34 @@ const isConnected = (node1, node2) => {
 
 console.log(findAdjacentNodes('A'))
 console.log(isConnected('A','D'))
+
+
+
+
 /**
  * 2. Adjacent Matrix
+ * This stores list of nodes and a 2D array of 0 and 1's 
+ * indicating connection of a node represented by an array to another node
+ * 
+ * Time complexity to fin Adjacent nodes O(v)
+ * Time complexity checking if nodes are connected O(1) 
+ * Space complexity is O(v^2)
  */
+
+const matrixVertices = ['A','B','C','D','E']
+
+const adjacencyMatrix = [
+    [0,1,0,1,0],
+    [1,0,1,0,0],
+    [0,1,0,1,1],
+    [1,0,1,0,1],
+    [0,0,1,1,0],
+]
+
+
+
+
+
 
 /**
  * 3. Adjacency Lists
