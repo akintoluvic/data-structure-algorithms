@@ -1,22 +1,78 @@
 // Types of Graphs
 
+/**
+ * 1. Vertex and Edges List
+ */
 
+/**
+ * 2. Adjacent Matrix
+ */
 
 /**
  * 3. Adjacency Lists
  * This stores the list of nodes a node is connected to.
  * Time complexity to find Adjacent Node is O(1)
- * Time complexity to add a node is O(1)
- * Time to complexity to check if a node is connected is O(1)
- * Space complexity is O(n)
+ * Time to complexity to check if a node is connected is O(log(v)) - where v is the number of nodes
+ * Space complexity is O(e) - where e is the number of edges
  */
 
-const adjacentVertices = ['a', 'b', 'c', 'd', 'e'];
+// const adjacentVertices = ['a', 'b', 'c', 'd', 'e'];
 
-const adjacencyList = [
-    ['b', 'd'],
-    ['a', 'c'],
-    ['b', 'd', 'e'],
-    ['a', 'c', 'e'],
-    ['c', 'd'],
-]
+// const adjacencyList = [
+//     ['b', 'd'],
+//     ['a', 'c'],
+//     ['b', 'd', 'e'],
+//     ['a', 'c', 'e'],
+//     ['c', 'd'],
+// ]
+class AdjacentNode {
+    constructor(value) {
+        this.value = value;
+        this.edgesList = [];
+    }
+
+    // add connection to a node and connect the node to this
+    connectNode(node) {
+        this.edgesList.push(node)
+        node.edgesList.push(this)
+    }
+
+    // get adjacent nodes to this node
+    getAdjacentNodes() {
+        return this.edgesList.map(edge => edge.value)
+    }
+}
+
+class AdjacentGraph {
+    constructor(nodes) {
+        this.nodes = [...nodes];
+    }
+    addNodeToGraph(node) {
+        this.nodes.push(node)
+    }
+}
+
+const nodeA = new AdjacentNode('A');
+const nodeB = new AdjacentNode('B');
+const nodeC = new AdjacentNode('C');
+const nodeD = new AdjacentNode('D');
+const nodeE = new AdjacentNode('E');
+
+const adjacentGraph = new AdjacentGraph([nodeA,nodeB,nodeC,nodeD, nodeE])
+
+// connecting nodes
+nodeA.connectNode(nodeB)
+nodeA.connectNode(nodeD)
+nodeB.connectNode(nodeC)
+nodeC.connectNode(nodeD)
+nodeC.connectNode(nodeE)
+nodeD.connectNode(nodeE)
+
+for(node of adjacentGraph.nodes) {
+    console.log(`Node ${node.value}`)
+    for(edge of node.edgesList) {
+        console.log(`Node ${node.value} is connected to ${edge.value}`)
+    }
+}
+
+console.log(nodeA.getAdjacentNodes())
