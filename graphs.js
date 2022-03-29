@@ -4,6 +4,8 @@
  * 1. Vertex and Edges List
  * This stores the list of nodes/vertices and the edges of the list in two diff arrays
  * Time complexity to find Adjacent Node is O(e)
+ * Time to check if two nodes are connected O(e)
+ * Space complexity O(v + e)
  */
 
 const vertices = ['A','B','C','D','E']
@@ -17,6 +19,37 @@ const edges = [
     ['D','E']
 ]
 
+// find adjacent nodes - given a node find all nodes it's connected to
+const findAdjacentNodes = (node) => {
+    // loop through edges array
+    // Is my node in any of them
+    //if yes, push to list of adjacent arrays
+    
+    const adjacentNodes = []
+
+    for (let edge of edges) {
+        // check if an edge contains node
+        const nodeIndex = edge.indexOf(node)
+        
+        // if it does, push its adjacent to adjacentNodes
+        if (nodeIndex > -1) {
+            adjacentNode = nodeIndex === 0 ? edge[1] : edge[0]
+            adjacentNodes.push(adjacentNode)
+        }
+    }
+    return adjacentNodes
+}
+
+// check if two nodes are connected
+const isConnected = (node1, node2) => {
+    // using some cause it will stop running once true
+    return edges.some((edge) => {
+        return edge.indexOf(node1) > -1 && edge.indexOf(node2) > -1
+    })
+}
+
+console.log(findAdjacentNodes('A'))
+console.log(isConnected('A','D'))
 /**
  * 2. Adjacent Matrix
  */
