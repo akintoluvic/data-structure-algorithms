@@ -62,6 +62,9 @@ console.log(isConnected('A','D'))
  * Time complexity to fin Adjacent nodes O(v)
  * Time complexity checking if nodes are connected O(1) 
  * Space complexity is O(v^2)
+ * 
+ * Only use this if the connections are plenty
+ * and the data is plenty
  */
 
 const matrixVertices = ['A','B','C','D','E']
@@ -74,6 +77,38 @@ const adjacencyMatrix = [
     [0,0,1,1,0],
 ]
 
+// to keep calculations from been expensive
+// create an object map for nodes and their index
+const nodeIndexMap = {
+    'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4
+}
+const adjacentNodesFromMatrix = (node) => {
+    // use index of node in index map
+    // to get index matrix and map to return 
+    // adjacent nodes
+
+    const adjacentNodes = []
+    const nodeConnections = adjacencyMatrix[nodeIndexMap[node]]
+    for (let connection in nodeConnections) {
+        if (nodeConnections[connection] === 1) {
+          adjacentNodes.push(matrixVertices[connection])
+        }
+    }
+    return adjacentNodes
+}
+
+const isConnectedNodesFromMatrix = (node1, node2) => {
+    // check the index of node2 in the adjacent matrix array of node1
+    const nodeIndex1 = nodeIndexMap[node1]
+    const nodeIndex2 = nodeIndexMap[node2]
+
+    return !!adjacencyMatrix[nodeIndex1][nodeIndex2]
+}
+
+
+
+console.log(adjacentNodesFromMatrix('B'))
+console.log(isConnectedNodesFromMatrix('A', 'E'))
 
 
 
@@ -87,15 +122,6 @@ const adjacencyMatrix = [
  * Space complexity is O(e) - where e is the number of edges
  */
 
-// const adjacentVertices = ['a', 'b', 'c', 'd', 'e'];
-
-// const adjacencyList = [
-//     ['b', 'd'],
-//     ['a', 'c'],
-//     ['b', 'd', 'e'],
-//     ['a', 'c', 'e'],
-//     ['c', 'd'],
-// ]
 class AdjacentNode {
     constructor(value) {
         this.value = value;
